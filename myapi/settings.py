@@ -15,20 +15,8 @@ import os
 import pymysql
 pymysql.install_as_MySQLdb()
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',   # 数据库引擎
-        'NAME': 'mysite',  # 数据库名，先前创建的
-        'USER': 'root',     # 用户名，可以自己创建用户
-        'PASSWORD': '123.com',  # 密码
-        'HOST': '127.0.0.1',  # mysql服务所在的主机ip
-        'PORT': '3306',         # mysql服务端口
-    }
-}
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
@@ -49,7 +37,6 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 2
 }
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -59,10 +46,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'corsheaders',  # 增加跨域支持
-    'rest_framework',   # django RESTful framework
-    'cmdb',         # CMDB 系统
-    'user',         # user
+    'corsheaders',                  # 增加跨域支持
+    'rest_framework',               # Django RESTful framework
+    'cmdb',                         # CMDB 系统
+    'user',                         # USER 接口
 ]
 
 MIDDLEWARE = [
@@ -111,6 +98,16 @@ WSGI_APPLICATION = 'myapi.wsgi.application'
 #     }
 # }
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',   # 数据库引擎
+        'NAME': 'mysite',                       # 数据库名，先前创建的
+        'USER': 'root',                         # 用户名，可以自己创建用户
+        'PASSWORD': '123.com',                  # 密码
+        'HOST': '127.0.0.1',                    # mysql服务所在的主机ip
+        'PORT': '3306',                         # mysql服务端口
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -172,5 +169,5 @@ CORS_ALLOW_HEADERS = (
 'origin',
 'authorization',
 'x-csrftoken',
-'X-Token'
+'X-Token'           # vue admin 需要X-TOKEN
 )

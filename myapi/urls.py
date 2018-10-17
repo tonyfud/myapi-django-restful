@@ -18,13 +18,13 @@ from django.urls import path, include, re_path
 from rest_framework import routers
 from user import views
 
-router = routers.DefaultRouter()
+router = routers.DefaultRouter()                    # restful api
 router.register(r'users', views.UserInfoViewSet)    # restful api
 router.register(r'groups', views.UserGroupViewSet)  # restful api
 
 urlpatterns = [
-    re_path(r'^', include(router.urls)),
-    re_path(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    re_path(r'^', include(router.urls)),            # restful api
+    re_path(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),     # restful api
     path('admin/', admin.site.urls),
     path('api/', include('mytable.urls')),
     path('user/', include('user.urls')),
