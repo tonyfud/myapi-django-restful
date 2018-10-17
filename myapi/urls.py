@@ -18,11 +18,20 @@ from django.urls import path, include, re_path
 from rest_framework import routers
 from user import views
 
+from rest_framework.schemas import get_schema_view
+from rest_framework_swagger.renderers import SwaggerUIRenderer, OpenAPIRenderer
+
+
+# Create our schema's view w/ the get_schema_view() helper method. Pass in the proper Renderers for swagger
+schema_view = get_schema_view(title='Users API', renderer_classes=[OpenAPIRenderer, SwaggerUIRenderer])
+
+
 router = routers.DefaultRouter()                    # restful api
 router.register(r'users', views.UserInfoViewSet)    # restful api
 router.register(r'groups', views.UserGroupViewSet)  # restful api
 
 urlpatterns = [
+    re_path(r'^docs/', schema_view, name="docs"),
     re_path(r'^', include(router.urls)),            # restful api
     re_path(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),     # restful api
     path('admin/', admin.site.urls),
