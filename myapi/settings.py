@@ -57,13 +57,14 @@ INSTALLED_APPS = [
     'rest_framework_swagger',       # django RESTFUL Swagger
     'cmdb',                         # CMDB 系统
     'user',                         # USER 接口
+    'ops',                          # 运维接口
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    #'django.middleware.csrf.CsrfViewMiddleware',
+    #'django.middleware.csrf.CsrfViewMiddleware',       # # csrf跨站请求保护机制，暂时先关闭
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'corsheaders.middleware.CorsMiddleware',
