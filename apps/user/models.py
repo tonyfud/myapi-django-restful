@@ -1,10 +1,5 @@
 from django.db import models
-from pygments.lexers import get_all_lexers
-from pygments.styles import get_all_styles
 
-LEXERS = [item for item in get_all_lexers() if item[1]]
-LANGUAGE_CHOICES = sorted([(item[1][0], item[0]) for item in LEXERS])
-STYLE_CHOICES = sorted((item, item) for item in get_all_styles())
 
 class VerifyCode(models.Model):
     """
@@ -12,7 +7,8 @@ class VerifyCode(models.Model):
     """
     code = models.CharField(max_length=10, verbose_name="验证码")
     mobile = models.CharField(max_length=11, verbose_name="电话")
-    add_time = models.DateTimeField(auto_now_add=True, verbose_name="添加时间")
+    create_date = models.DateTimeField(auto_now_add=True, null=True, verbose_name="创建时间")
+    update_time = models.DateTimeField(auto_now=True, null=True, verbose_name="更新时间")  # 更新时自动更新时间
 
     class Meta:
         verbose_name = "短信验证码"
@@ -59,6 +55,13 @@ class UserInfo(models.Model):
 
     def __str__(self):
         return self.username
+
+
+class Token(models.Model):
+    user = models.OneToOneField(to=UserInfo, on_delete=models.CASCADE)  # 一对一关系
+    token = models.CharField(max_length=64)
+    create_date = models.DateTimeField(auto_now_add=True, null=True, verbose_name="创建时间")
+    update_time = models.DateTimeField(auto_now=True, null=True, verbose_name="更新时间")  # 更新时自动更新时间
 
 
 class Business(models.Model):

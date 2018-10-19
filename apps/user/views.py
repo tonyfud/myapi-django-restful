@@ -25,7 +25,7 @@ class UserInfoViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
-    queryset = UserInfo.objects.all()
+    queryset = UserInfo.objects.all().order_by('id')
     serializer_class = UserInfoSerializer
     pagination_class = UserPagination
 
@@ -34,7 +34,7 @@ class UserGroupViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows groups to be viewed or edited.
     """
-    queryset = UserGroup.objects.all()
+    queryset = UserGroup.objects.all().order_by('id')
     serializer_class = UserGroupSerializer
 
 
