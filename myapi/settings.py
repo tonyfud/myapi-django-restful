@@ -27,7 +27,7 @@ SECRET_KEY = '(k&(n1wn(1@hcc_%@n_ilkgjgl)t8%e$uw$&)i=sp_kfa522v-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*', ]
 
 # 让UserProfile替换系统用户
 #AUTH_USER_MODEL='users.UserProfile'
@@ -58,6 +58,9 @@ INSTALLED_APPS = [
     'cmdb',                         # CMDB 系统
     'user',                         # USER 接口
     'ops',                          # 运维接口
+    'xadmin',
+    'crispy_forms',
+    'rest_framework_docs',
 ]
 
 MIDDLEWARE = [

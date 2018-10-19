@@ -4,8 +4,21 @@ from django.shortcuts import render
 from django.shortcuts import HttpResponse
 from user import models
 from user.models import UserInfo, UserGroup
+
 from rest_framework import viewsets
+from rest_framework.pagination import PageNumberPagination
+from django_filters.rest_framework import DjangoFilterBackend
+
 from user.serializers import UserInfoSerializer, UserGroupSerializer
+from django.views import View
+from django.http import JsonResponse
+
+
+class UserPagination(PageNumberPagination):
+    page_size = 2
+    page_size_query_param = 'page_size'
+    page_query_param = "p"
+    max_page_size = 100
 
 
 class UserInfoViewSet(viewsets.ModelViewSet):
@@ -14,6 +27,7 @@ class UserInfoViewSet(viewsets.ModelViewSet):
     """
     queryset = UserInfo.objects.all()
     serializer_class = UserInfoSerializer
+    pagination_class = UserPagination
 
 
 class UserGroupViewSet(viewsets.ModelViewSet):
@@ -22,6 +36,22 @@ class UserGroupViewSet(viewsets.ModelViewSet):
     """
     queryset = UserGroup.objects.all()
     serializer_class = UserGroupSerializer
+
+
+class json(View):
+    def get(self, request, *args, **kwargs):
+        result = {
+            'status': True,
+            'data': 'response data'
+        }
+        return JsonResponse(result, status=200)
+
+    def post(self, request, *args, **kwargs):
+        result = {
+            'status': True,
+            'data': 'response data'
+        }
+        return JsonResponse(result, status=200)
 
 
 def login(request):
