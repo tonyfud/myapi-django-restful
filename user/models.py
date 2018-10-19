@@ -31,7 +31,7 @@ class UserGroup(models.Model):
     update_time = models.DateTimeField(auto_now=True, null=True)  # 更新时自动更新时间
 
     class Meta:
-        verbose_name = "用户组表"
+        verbose_name = "用户组"
         verbose_name_plural = verbose_name
 
     def __str__(self):
@@ -54,7 +54,7 @@ class UserInfo(models.Model):
     update_time = models.DateTimeField(auto_now=True, null=True, verbose_name="更新时间")  # 更新时自动更新时间
 
     class Meta:
-        verbose_name = "用户信息表"
+        verbose_name = "用户信息"
         verbose_name_plural = verbose_name
 
     def __str__(self):
@@ -71,7 +71,7 @@ class Business(models.Model):
     update_time = models.DateTimeField(auto_now=True, null=True, verbose_name="更新时间")  # 更新时自动更新时间
 
     class Meta:
-        verbose_name = "工作组表"
+        verbose_name = "工作组"
         verbose_name_plural = verbose_name
 
     def __str__(self):
