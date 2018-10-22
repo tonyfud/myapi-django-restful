@@ -63,11 +63,13 @@ def logout(request):
 
 
 def info(request):
-    return HttpResponse('{"code" : 20000, "data" : {"roles":["admin"],"name":"admin","avatar":"https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif"}}', content_type="application/json")
+    return HttpResponse('{"code" : 20000, "data" : {"roles":["admin"],"name":"admin",'
+                        '"avatar":"https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif"}}',
+                        content_type="application/json")
 
 
 def add(request):
-    #ug_obj = models.UserGroup.objects.create(caption="外键数据添加")
+    # ug_obj = models.UserGroup.objects.create(caption="外键数据添加")
     # 把外键ug_obj当参数传入
     models.UserInfo.objects.create(username='derek', password='123', group_id=1, email='derek@test.com', status=0)
     return HttpResponse('11')

@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.shortcuts import HttpResponse
-from cmdb.models import Server, Host
+from .models import Server, Host
 
 from rest_framework import viewsets
-from cmdb.serializers import ServerSerializer
+from .serializers import ServerSerializer
 
 
 class ServerViewSet(viewsets.ModelViewSet):

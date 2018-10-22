@@ -26,9 +26,10 @@ from rest_framework.documentation import include_docs_urls
 # Create our schema's view w/ the get_schema_view() helper method. Pass in the proper Renderers for swagger
 schema_view = get_schema_view(title='DEVOPS', renderer_classes=[OpenAPIRenderer, SwaggerUIRenderer])
 
+
 urlpatterns = [
     path('favicon.ico', serve, {'path': 'favicon.ico'}),
-    #re_path(r'^favicon\.ico$', RedirectView.as_view(url='/static/favicon.ico')),
+    # re_path(r'^favicon\.ico$', RedirectView.as_view(url='/static/favicon.ico')),
     re_path(r'^swagger/', schema_view, name="DEVOPS"),
     re_path(r'^docs/', include_docs_urls(title="DEVOPS")),
     # re_path(r'^', include(router.urls)),            # restful api

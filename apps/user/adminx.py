@@ -1,5 +1,8 @@
 import xadmin
 from xadmin import views
+# Register your models here.
+from .models import UserInfo, UserGroup, Business, VerifyCode, Token
+
 
 class BaseSetting(object):
     enable_themes = True
@@ -9,9 +12,6 @@ class BaseSetting(object):
 class GlobalSettings(object):
     site_title = "MYAPI-后台"
     site_footer = "MYAPI"
-
-# Register your models here.
-from user.models import UserInfo, UserGroup, Business, VerifyCode, Token
 
 
 class UserInfoAdmin(object):
@@ -35,7 +35,7 @@ class TokenAdmin(object):
     list_display = ('user', 'token')  # list
 
 
-xadmin.site.register(UserInfo, UserInfoAdmin)       #admin 后台编辑页，添加页只显示 UserInfo_Admin 定义的字段
+xadmin.site.register(UserInfo, UserInfoAdmin)       # admin 后台编辑页，添加页只显示 UserInfo_Admin 定义的字段
 xadmin.site.register(UserGroup, UserGroupAdmin)
 xadmin.site.register(VerifyCode, VerifyCodeAdmin)
 xadmin.site.register(Token, TokenAdmin)

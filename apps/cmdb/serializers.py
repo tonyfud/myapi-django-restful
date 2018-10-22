@@ -1,4 +1,4 @@
-from cmdb.models import Server, Host
+from .models import Server, Host
 from rest_framework import serializers
 
 

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from cmdb.models import Host, Server
+from .models import Host, Server
 
 # Register your models here.
 

@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from ops.models import JobsList
+from .models import JobsList
+from .serializers import JobsListSerializer
 from rest_framework import viewsets
-from ops.serializers import JobsListSerializer
 
 
 class JobsListViewSet(viewsets.ModelViewSet):

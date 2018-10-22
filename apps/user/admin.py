@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from user.models import UserInfo, UserGroup, Business, VerifyCode
+from .models import UserInfo, UserGroup, Business, VerifyCode
 
 
 # Register your models here.

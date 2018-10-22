@@ -33,7 +33,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['*', ]
 
 # 让UserProfile替换系统用户
-#AUTH_USER_MODEL='users.UserProfile'
+# AUTH_USER_MODEL='users.UserProfile'
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
@@ -42,7 +42,11 @@ REST_FRAMEWORK = {
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '5/m',  # scope: rate 匿名用户: 每分钟5次
+        'user': '10/m'  # 登录用户
+    }
 
 }
 
@@ -70,13 +74,13 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    #'django.middleware.csrf.CsrfViewMiddleware',       # # csrf跨站请求保护机制，暂时先关闭
+    # 'django.middleware.csrf.CsrfViewMiddleware',       # # csrf跨站请求保护机制，暂时先关闭
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'user.middleware.DisableCSRF',      #django 解决使用django rest framework时web请求报CSRF Failed: CSRF cookie not set
+    'user.middleware.DisableCSRF',      # django 解决使用django rest framework时web请求报CSRF Failed: CSRF cookie not set
 ]
 
 
@@ -172,20 +176,20 @@ CORS_ORIGIN_WHITELIST = ()
 CORS_ORIGIN_REGEX_WHITELIST = ()
 
 CORS_ALLOW_METHODS = (
-'GET',
-'POST',
-'PUT',
-'PATCH',
-'DELETE',
-'OPTIONS'
+    'GET',
+    'POST',
+    'PUT',
+    'PATCH',
+    'DELETE',
+    'OPTIONS'
 )
 
 CORS_ALLOW_HEADERS = (
-'x-requested-with',
-'content-type',
-'accept',
-'origin',
-'authorization',
-'x-csrftoken',
-'X-Token'           # vue admin 需要X-TOKEN
+    'x-requested-with',
+    'content-type',
+    'accept',
+    'origin',
+    'authorization',
+    'x-csrftoken',
+    'X-Token'           # vue admin 需要X-TOKEN
 )
