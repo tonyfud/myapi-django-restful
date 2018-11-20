@@ -118,6 +118,7 @@ def login(request):
                     request.session['is_login'] = True
                     request.session['user_id'] = user.id
                     request.session['user_name'] = user.username
+                    request.session['last_login_time'] = str(user.last_login_time)
                     # 记录最后登录时间
                     logintime = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())
                     models.UserInfo.objects.filter(username=username).update(last_login_time=logintime)

@@ -67,7 +67,7 @@ INSTALLED_APPS = [
     'ops',                          # 运维接口
     'xadmin',
     'crispy_forms',
-    'rest_framework_docs',
+    # 'rest_framework_docs',
 ]
 
 MIDDLEWARE = [
