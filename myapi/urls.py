@@ -18,14 +18,8 @@ urlpatterns = [
     path('favicon.ico', serve, {'path': 'favicon.ico'}),
 
     # admin lte
-    re_path(r'^$', views.index, name='index'),
-    path('login/', auth_views.LoginView.as_view(template_name='login.html',
-                                                redirect_field_name='/xadmin',
-                                                redirect_authenticated_user=True), name='login'),
-    path('logout/', auth_views.logout_then_login, name='logout'),
-
-    # restful api
-    # re_path(r'^favicon\.ico$', RedirectView.as_view(url='/static/favicon.ico')),
+    path('index/', views.index, name='index'),
+    #
     re_path(r'^swagger/', schema_view, name="DEVOPS"),
     re_path(r'^docs/', include_docs_urls(title="DEVOPS")),
     # re_path(r'^', include(router.urls)),            # restful api

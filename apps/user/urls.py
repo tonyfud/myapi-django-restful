@@ -10,10 +10,12 @@ router.register(r'users', views.UserInfoViewSet)    # restful api
 router.register(r'groups', views.UserGroupViewSet)  # restful api
 
 urlpatterns = [
-    re_path(r'^', include(router.urls)),
-    path('json', views.json.as_view()),
+    # re_path(r'^', include(router.urls)),
+    # path('json', views.json.as_view()),
+    # path('info', views.info, name='info'),
     path('login', views.login, name='login'),
-    path('info', views.info, name='info'),
+    path('logout', views.logout, name='logout'),
+    path('dashboard', views.dashboard, name='dashboard'),
 
     # re_path(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 

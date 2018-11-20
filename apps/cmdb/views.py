@@ -5,6 +5,8 @@ from .models import Server, Host
 from rest_framework import viewsets
 from .serializers import ServerSerializer
 
+from django.shortcuts import render
+from django.shortcuts import redirect
 
 class ServerViewSet(viewsets.ModelViewSet):
     """
@@ -16,3 +18,19 @@ class ServerViewSet(viewsets.ModelViewSet):
 
 def GetHostList(request):
     return HttpResponse('{"code" : 20000, "data" : {"token" : "admin"}}', content_type="application/json")
+
+
+def hosts_get_list(request):
+    if not request.session.get('is_login', None):
+        # 如果本来就未登录，也就没有登出一说
+        return redirect("/user/login?msg=你尚未登录,请登录后进行访问")
+    hosts = Host.objects.all()
+    return render(request, 'cmdb/hosts_list.html', {"hosts": hosts})
+
+
+def servers_get_list(request):
+    if not request.session.get('is_login', None):
+        # 如果本来就未登录，也就没有登出一说
+        return redirect("/user/login?msg=你尚未登录,请登录后进行访问")
+    servers = Server.objects.all()
+    return render(request, 'cmdb/servers_list.html', {"servers": servers})

@@ -1,6 +1,7 @@
 # Create your views here.
 from django.shortcuts import HttpResponse
 from django.shortcuts import render
+from django.shortcuts import redirect
 from django.shortcuts import HttpResponse
 from user import models
 from user.models import UserInfo, UserGroup
@@ -54,14 +55,6 @@ class json(View):
         return JsonResponse(result, status=200)
 
 
-def login(request):
-    return HttpResponse('{"code" : 20000, "data" : {"token" : "admin"}}', content_type="application/json")
-
-
-def logout(request):
-    return HttpResponse('', content_type="application/json")
-
-
 def info(request):
     return HttpResponse('{"code" : 20000, "data" : {"roles":["admin"],"name":"admin",'
                         '"avatar":"https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif"}}',
@@ -95,3 +88,52 @@ def getuserinfo2(request):
     obj = models.UserInfo.objects.all().values('username')
     print(obj)
     return HttpResponse(obj)
+
+
+def login(request):
+    if request.session.get('is_login', None):
+        return redirect('dashboard')
+    if request.method == "GET":
+        msg = request.GET.get('msg', None)
+        return render(request, 'user/login.html', {"message": msg})
+    if request.method == "POST":
+        username = request.POST.get('username', None)
+        password = request.POST.get('password', None)
+        message = "所有字段都必须填写！"
+        if username and password:  # 确保用户名和密码都不为空
+            username = username.strip()
+            try:
+                user = models.UserInfo.objects.get(username=username)
+                if user.password == password:
+                    request.session['is_login'] = True
+                    request.session['user_id'] = user.id
+                    request.session['user_name'] = user.username
+                    return redirect('dashboard')
+                else:
+                    message = "密码不正确！"
+            except:
+                message = "用户名不存在！"
+        return render(request, 'user/login.html', {"message": message})
+    return render(request, 'user/login.html')
+    # return HttpResponse('{"code" : 20000, "data" : {"token" : "admin"}}', content_type="application/json")
+
+
+def logout(request):
+    if not request.session.get('is_login', None):
+        # 如果本来就未登录，也就没有登出一说
+        return redirect("/user/login")
+    request.session.flush()
+    # 或者使用下面的方法
+    # del request.session['is_login']
+    # del request.session['user_id']
+    # del request.session['user_name']
+    return redirect("/user/login")
+    # return HttpResponse('', content_type="application/json")
+
+
+def dashboard(request):
+    print("dashboard")
+    if not request.session.get('is_login', None):
+        # 如果本来就未登录，也就没有登出一说
+        return redirect("/user/login?msg=你尚未登录,请登录后进行访问")
+    return render(request, 'user/dashboard.html', locals())
