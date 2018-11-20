@@ -48,6 +48,7 @@ class UserInfo(models.Model):
     status = models.SmallIntegerField('用户状态', choices=status_choices, default=1)
     create_date = models.DateTimeField(auto_now_add=True, null=True, verbose_name="创建时间")
     update_time = models.DateTimeField(auto_now=True, null=True, verbose_name="更新时间")  # 更新时自动更新时间
+    last_login_time = models.DateTimeField(null=True, verbose_name="最后一次时间")
 
     class Meta:
         verbose_name = "用户信息"

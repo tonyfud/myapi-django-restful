@@ -15,6 +15,8 @@ from django.views import View
 from django.http import JsonResponse
 
 
+import time
+
 class UserPagination(PageNumberPagination):
     page_size = 2
     page_size_query_param = 'page_size'
@@ -90,6 +92,14 @@ def getuserinfo2(request):
     return HttpResponse(obj)
 
 
+def check_is_login(func):
+    def wrapper(request, *args, **kwargs):
+        if not request.session.get("is_login"):
+            return redirect("/user/login?msg=你尚未登录,请登录后进行访问")
+        return func(request, *args, **kwargs)
+    return wrapper
+
+
 def login(request):
     if request.session.get('is_login', None):
         return redirect('dashboard')
@@ -108,6 +118,9 @@ def login(request):
                     request.session['is_login'] = True
                     request.session['user_id'] = user.id
                     request.session['user_name'] = user.username
+                    # 记录最后登录时间
+                    logintime = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())
+                    models.UserInfo.objects.filter(username=username).update(last_login_time=logintime)
                     return redirect('dashboard')
                 else:
                     message = "密码不正确！"
@@ -118,10 +131,11 @@ def login(request):
     # return HttpResponse('{"code" : 20000, "data" : {"token" : "admin"}}', content_type="application/json")
 
 
+@check_is_login
 def logout(request):
-    if not request.session.get('is_login', None):
-        # 如果本来就未登录，也就没有登出一说
-        return redirect("/user/login")
+    # if not request.session.get('is_login', None):
+    #     # 如果本来就未登录，也就没有登出一说
+    #     return redirect("/user/login")
     request.session.flush()
     # 或者使用下面的方法
     # del request.session['is_login']
@@ -131,6 +145,7 @@ def logout(request):
     # return HttpResponse('', content_type="application/json")
 
 
+@check_is_login
 def dashboard(request):
     print("dashboard")
     if not request.session.get('is_login', None):
