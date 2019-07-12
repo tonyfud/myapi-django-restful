@@ -1,20 +1,18 @@
-{% extends 'base.html' %}
+{% extends 'base_sidebar.html' %}
 {% load staticfiles %}
 {% block title %}Dashboard{% endblock %}
 
 {% block css %}
     <link rel="stylesheet" href="{% static 'plugins/datatables.net-bs/css/dataTables.bootstrap.css' %}">
-    <link rel="stylesheet" href="{% static 'dist/css/AdminLTE.min.css' %}">
-    <link rel="stylesheet" href="{% static 'dist/css/skins/_all-skins.min.css' %}">
 
-<style>
-td{
-    text-align:center;
-}
-th{
-    text-align: center;
-}
-</style>
+    <style>
+    td{
+        text-align:center;
+    }
+    th{
+        text-align: center;
+    }
+    </style>
 
 {% endblock %}
 

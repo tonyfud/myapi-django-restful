@@ -37,11 +37,11 @@ ALLOWED_HOSTS = ['*', ]
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
     'PAGE_SIZE': 2,
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+        'rest_framework.permissions.AllowAny',
+        #'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ],
     'DEFAULT_THROTTLE_RATES': {
         'anon': '5/m',  # scope: rate 匿名用户: 每分钟5次
@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',                  # 增加跨域支持
+    'django_filters',
     'rest_framework',               # Django RESTful framework
     'rest_framework_swagger',       # django RESTFUL Swagger
     'cmdb',                         # CMDB 系统

@@ -64,7 +64,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="#" class="logo">
+    <a href="/user/dashboard" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini">OPS</span>
       <!-- logo for regular state and mobile devices -->
@@ -197,8 +197,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="/cmdb/hosts"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-            <li><a href="/cmdb/servers"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+            <li><a href="/cmdb/hosts"><i class="fa fa-circle-o"></i> hosts</a></li>
+            <li><a href="/cmdb/servers"><i class="fa fa-circle-o"></i> servers</a></li>
           </ul>
         </li>
 
@@ -250,6 +250,7 @@
 <script src="{% static 'plugins/jquery-slimscroll/jquery.slimscroll.min.js' %}"></script>
 <!-- FastClick -->
 <script src="{% static 'plugins/fastclick/lib/fastclick.js' %}"></script>
+
 <script>
       $(document).ready(function () {
         $('.sidebar-menu').tree()

@@ -34,12 +34,30 @@ class UserGroup(models.Model):
         return self.caption
 
 
-class UserInfo(models.Model):
+class Roles(models.Model):
     """
+    用户角色列表
+    """
+    id = models.IntegerField(primary_key=True, verbose_name="id")                   # 唯一索引
+    name = models.CharField(max_length=32, unique=True, verbose_name="角色名")
+    seq = models.IntegerField(unique=True, verbose_name="顺序ID")     # 更新时自动更新时间
+
+    class Meta:
+        verbose_name = "角色列表"
+        verbose_name_plural = verbose_name
+
+    # def __str__(self):
+    #     return self.__dict__
+
+
+class UserInfo(models.Model):
+    """f
     用户信息表
     """
+    id = models.AutoField(primary_key=True, verbose_name="id")
     username = models.CharField(max_length=32, unique=True, verbose_name="用户")
     password = models.CharField(max_length=64, verbose_name="密码")
+    realname = models.CharField(max_length=32, verbose_name="姓名", default="")
     email = models.CharField(max_length=64, verbose_name="Email")
     mobile = models.CharField(max_length=11, verbose_name="电话号码")
     group = models.ForeignKey("UserGroup", to_field="id", default=1, on_delete=models.CASCADE,

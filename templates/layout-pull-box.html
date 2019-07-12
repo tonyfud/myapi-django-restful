@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{% block title %}主页{% endblock %}</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap/css/bootstrap.min.css' %}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{% static 'plugins/font-awesome/css/font-awesome.min.css' %}">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="{% static 'plugins/Ionicons/css/ionicons.min.css' %}">
+    <!-- 下拉插件 -->
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap-select/css/bootstrap-select.min.css' %}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{% static 'dist/css/AdminLTE.min.css' %}">
+    <link rel="stylesheet" href="{% static 'dist/css/skins/skin-blue.min.css' %}">
+    <link rel="stylesheet" href="{% static 'dist/css/skins/_all-skins.min.css' %}">
+    <!-- 自定认主题 -->
+    <link rel="stylesheet" href="{% static 'sdtheme/css/sdtheme.css' %}">
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+    {% block css %}{% endblock %}
+
+    <!-- jQuery 3 -->
+    <script src="{% static 'plugins/jquery/jquery.js' %}"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <!-- 弹出层插件layer -->
+    <script src="{% static 'plugins/layer-v3.1.1/layer.js' %}"></script>
+    <!-- Ajax请求插件 -->
+    <script src="{% static 'plugins/jquery-sdajax/jquery.sdajax.js' %}"></script>
+    <!-- cookie plugins -->
+    <script src="{% static 'plugins/jquery-cookie/jquery.cookie.js' %}"></script>
+    <!-- 下拉列表插件 -->
+    <script src="{% static 'plugins/bootstrap-select/js/bootstrap-select.min.js' %}"></script>
+    <script src="{% static 'plugins/bootstrap-select/js/i18n/defaults-zh_CN.min.js' %}"></script>
+    <!-- AdminLTE App -->
+    <script src="{% static 'dist/js/adminlte.min.js' %}"></script>
+    <!-- 当前主题初始化 -->
+    <script src="{% static 'sdtheme/scripts/sdtheme.js' %}"></script>
+    <!-- 当前产品初始化 -->
+    <script src="{% static 'product/scripts/rms.js' %}"></script>
+
+</head>
+
+    {% block content %}{% endblock %}
+
+    <!-- 验证插件 -->
+    <script src="{% static 'plugins/jquery-validation/jquery.validate.js' %}"></script>
+    <script src="{% static 'plugins/jquery-validation/localization/messages_zh.min.js' %}"></script>
+    <script src="{% static 'sdtheme/scripts/sdvalidate.js' %}"></script>
+
+    {% block script %}{% endblock %}
+
+</body>
+</html>
